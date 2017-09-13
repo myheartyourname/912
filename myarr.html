@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>My Array</title>
+</head>
+<body>
+	<script>
+		let arr=new MyArray('a','b','c','d',1,2,3,4);  
+
+        arr.push('x','y','z');
+        arr.reverse();
+        arr.indexOf('c');
+        arr.lastindexOf(1);
+        arr.includes('a');
+        arr.some(function(value){
+           return typeof value=='number';
+        });
+        arr.every(function(value){
+           return typeof value=='number';
+        });
+        arr.join('-');
+        // arr.sortUp();
+        arr.map(function(value){
+        	return value*2;
+        });
+        arr.filter(function(value){
+        	return value%2==0;
+        });
+		//构造函数
+        function MyArray(){  //将arr的下标给了MyArray的下标
+        //添加属性  方法
+        	// this[0]=arguments[0];
+        	// this[1]=arguments[1];
+        	// this[2]=arguments[2];
+        	// this[3]=arguments[3];
+        	// this[4]=arguments[4];
+        	// this[5]=arguments[5];
+        	// this[6]=arguments[6];
+        	// this[7]=arguments[7];
+        	// this.length=arguments.length;  //方法
+            
+
+            for (let i=0;i<arguments.length;i++){
+            	this[i]=arguments[i];
+            	this.length=arguments.length;
+            	this.push=function(){
+            	    for(let i=0;i<arguments.length;i++){
+            	    	this[this.length]=arguments[i];
+            	    	this.length++;
+            	    }
+
+                }
+                this.reverse=function(){
+                	let newarr=[];
+                	for (let i=this.length-1;i>-1;i--){
+                        newarr[newarr.length]=this[i];
+                	}
+                	return newarr;
+                }
+                this.indexOf=function(value){
+                	for (let i=0;i<this.length;i++){
+                        if (this[i]==value){
+                        	return i;
+                        }
+                	}
+                	return -1;
+                }
+                this.lastindexOf=function(value){
+                	for (let i=this.length-1;i>=0;i--){
+                        if (this[i]==value){
+                        	return i;
+                        }
+                	}
+                	return -1;
+                }
+                this.includes=function(value){
+                	for (let i=0;i<this.length;i++){
+                		if(this[i]==value){
+                			return true;
+                		}
+                	}
+                	return false;
+                }
+                this.some=function(fn){
+                    for (let i=0;i<this.length;i++){
+                    	if (fn(this[i])){
+                    		return true;
+                    	}
+                    }
+                    return false;
+                }
+                this.every=function(fn){
+                	for (let i=0;i<this.length;i++){
+                		if(!fn(this[i])){  //一个不满足就输出false
+                           return false;
+                		}
+                	}
+                	return true;
+                }
+                this.join=function(str){
+                	let result='';
+                    for (let i=0;i<this.length;i++){
+                    	if (i<this.length-1){
+                    		result+=this[i]+str;
+                    	}else{
+                    		result+=this[i];
+                    	}
+                    }
+                    return result;
+                }
+        //         this.sortUp=function(){
+        //             for(let i=0;i<this.length;i++){
+		    		// 	for(let j=i+1;j<this.length;j++){
+		      //               if(this[j]<this[i]){
+		      //                  let temp=this[j];
+		      //                  this[j]=this[i];
+		      //                  this[i]=temp;
+		      //               }
+		    		// 	}
+		    		// }
+        //         }
+                this.map=function(fn){
+                	let newarr=[];
+                	for (let i=0;i<this.length;i++){
+                		newarr[newarr.length]=fn(this[i]);
+                	}
+                	return newarr;
+                }
+                this.filter=function(fn){
+                	let newarr=[];
+                	for (let i=0;i<this.length;i++){
+                		if (fn(this[i])){
+                			newarr[newarr.length]=this[i];
+                		}
+                	}
+                	return newarr;
+                }
+            }
+        }
+        console.log(arr);
+        console.log(arr.reverse());
+        console.log(arr.indexOf('c'));    //2
+        console.log(arr.lastindexOf(1));  //4
+        console.log(arr.includes('a'));   //true
+        console.log(arr.some(function(value){
+           return typeof value=='number';
+        }));  //true
+        console.log(arr.every(function(value){
+           return typeof value=='number';
+        }));  //false
+        console.log(arr.join('-'));
+        // console.log(arr.sortUp());
+        console.log(arr.map(function(value){
+        	return value*2;
+        }));
+        console.log(arr.filter(function(value){
+        	return value%2==0;
+        }));
+	</script>
+</body>
+</html>
